@@ -2,7 +2,12 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { Pool } = require("pg");
 
-const pool = new Pool({ connectionString: process.env.PG_CONNECTION_STRING });
+const pool = new Pool({
+  connectionString: process.env.PG_CONNECTION_STRING,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 passport.use(
   new GoogleStrategy(
